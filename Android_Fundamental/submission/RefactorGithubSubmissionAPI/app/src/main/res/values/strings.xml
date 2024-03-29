@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">RefactorGithubSubmissionAPI</string>
+
+    <string name="github_username">username</string>
+    <string name="github_account_name">account name</string>
+    <string name="searchbar_placeholder">Search user by username</string>
+
+    <string name="github_follower">Follower</string>
+    <string name="github_following">Following</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="no_data">No data</string>
+</resources>
