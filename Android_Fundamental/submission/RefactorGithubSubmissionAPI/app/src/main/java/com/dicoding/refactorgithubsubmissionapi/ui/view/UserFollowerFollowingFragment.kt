@@ -63,24 +63,20 @@ class UserFollowerFollowingFragment : Fragment() {
         when (position) {
             1 -> {
                 if (userFollowerFollowingViewModel.userFollowersList.value == null){
-                    println("debug list followers null")
                     userFollowerFollowingViewModel.getFollowersFromTheUser(usernameQuery = username.toString())
                 }
                 userFollowerFollowingViewModel.userFollowersList.observe(viewLifecycleOwner) { usersList ->
                     if (usersList != null) {
-                        println("debug list followers != null")
                         setUsersListDataToRecyclerView(usersList)
                     }
                 }
             }
             2 -> {
                 if (userFollowerFollowingViewModel.userFollowingList.value == null){
-                    println("debug list following null")
                     userFollowerFollowingViewModel.getFollowingFromTheUser(usernameQuery = username.toString())
                 }
                 userFollowerFollowingViewModel.userFollowingList.observe(viewLifecycleOwner) { usersList ->
                     if (usersList != null) {
-                        println("debug list following != null")
                         setUsersListDataToRecyclerView(usersList)
                     }
                 }

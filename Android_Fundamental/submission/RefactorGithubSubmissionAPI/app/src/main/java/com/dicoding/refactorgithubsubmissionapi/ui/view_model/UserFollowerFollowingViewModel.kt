@@ -39,9 +39,8 @@ class UserFollowerFollowingViewModel : ViewModel() {
                 println("debug get followers...")
                 if (response.isSuccessful) {
                     val detailUser = response.body()
-//                    if (!detailUser.isNullOrEmpty()) {
+//                    whether null or empty, assign it
                         _userFollowersList.value = detailUser
-//                    }
                 } else {
                     _errorMsg.value = "Error: ${response.message()}"
                     Log.e(ERROR_PLACE, "onFailure: ${response.message()}")
@@ -66,9 +65,8 @@ class UserFollowerFollowingViewModel : ViewModel() {
                 println("debug get following...")
                 if (response.isSuccessful) {
                     val detailUser = response.body()
-//                    if (!detailUser.isNullOrEmpty()) {
+//                    whether null or empty, assign it
                         _userFollowingList.value = detailUser
-//                    }
                 } else {
                     _errorMsg.value = "Error: ${response.message()}"
                     Log.e(ERROR_PLACE, "onFailure: ${response.message()}")
