@@ -110,6 +110,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.fabFavoriteUsersList.setOnClickListener {
             val moveFavoriteUsersListActivityIntent = Intent(this@MainActivity, FavoriteUsersListActivity::class.java)
+            mainViewModel.setIsLoadingValue(true)
             startActivity(moveFavoriteUsersListActivityIntent)
         }
 
@@ -126,5 +127,10 @@ class MainActivity : AppCompatActivity() {
                 mainViewModel.getGithubUserDetailAccount(usernameQuery = userAccount.login.toString())
             }
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        mainViewModel.setIsLoadingValue(false)
     }
 }

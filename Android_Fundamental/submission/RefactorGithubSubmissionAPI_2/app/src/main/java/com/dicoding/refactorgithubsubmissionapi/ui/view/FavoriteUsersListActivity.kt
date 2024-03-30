@@ -33,6 +33,7 @@ class FavoriteUsersListActivity : AppCompatActivity() {
         binding.rvFavoriteUsersAccount.addItemDecoration(itemDecoration)
 
         mainViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, MainViewModel::class.java)
+//        mainViewModel.setIsLoadingValue(false)
 
         mainViewModel.userDetail.observe(this@FavoriteUsersListActivity) { event ->
             event.getContentIfNotHandled()?.let { user ->
@@ -48,6 +49,7 @@ class FavoriteUsersListActivity : AppCompatActivity() {
         }
 
         favUserViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, FavoriteUserViewModel::class.java)
+
 //        sebelum ditampilin ke recyclerview, perlu ubah dulu object dari FavoriteUser ke ItemsItem
         favUserViewModel.favoriteUsersList.observe(this@FavoriteUsersListActivity) { users ->
             val items = arrayListOf<ItemsItem>()
@@ -56,6 +58,9 @@ class FavoriteUsersListActivity : AppCompatActivity() {
                 items.add(item)
             }
             setUsersListDataToRecyclerView(items.toList())
+
+            if (!favUserViewModel.favoriteUsersList.value.isNullOrEmpty()) binding.tvNoData.visibility = View.GONE
+            else binding.tvNoData.visibility = View.VISIBLE
         }
     }
 
@@ -71,4 +76,12 @@ class FavoriteUsersListActivity : AppCompatActivity() {
             }
         })
     }
+
+//    override fun onStart() {
+//        super.onStart()
+//        if (!favUserViewModel.favoriteUsersList.value.isNullOrEmpty()) {
+//            println("debug: inside fav users list not null onStart()")
+//            binding.tvNoData.visibility = View.GONE
+//        }
+//    }
 }

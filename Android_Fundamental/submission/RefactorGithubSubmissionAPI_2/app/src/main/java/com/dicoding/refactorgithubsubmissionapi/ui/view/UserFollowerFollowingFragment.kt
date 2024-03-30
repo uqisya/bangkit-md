@@ -69,9 +69,15 @@ class UserFollowerFollowingFragment : Fragment() {
                 }
                 userFollowerFollowingViewModel.userFollowersList.observe(viewLifecycleOwner) { usersList ->
                     if (usersList != null) {
+                        binding.tvNoData.visibility = View.GONE
                         setUsersListDataToRecyclerView(usersList)
+
+                        if (usersList.isEmpty()) {
+                            binding.tvNoData.visibility = View.VISIBLE
+                        }
                     }
                 }
+
             }
             2 -> {
                 if (userFollowerFollowingViewModel.userFollowingList.value == null){
@@ -79,9 +85,15 @@ class UserFollowerFollowingFragment : Fragment() {
                 }
                 userFollowerFollowingViewModel.userFollowingList.observe(viewLifecycleOwner) { usersList ->
                     if (usersList != null) {
+                        binding.tvNoData.visibility = View.GONE
                         setUsersListDataToRecyclerView(usersList)
+
+                        if (usersList.isEmpty()) {
+                            binding.tvNoData.visibility = View.VISIBLE
+                        }
                     }
                 }
+
             }
         }
 

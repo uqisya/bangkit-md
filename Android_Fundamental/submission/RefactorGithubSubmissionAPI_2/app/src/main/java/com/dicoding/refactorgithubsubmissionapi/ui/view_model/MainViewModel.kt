@@ -110,5 +110,7 @@ class MainViewModel : ViewModel() {
         })
     }
 
-
+    internal fun setIsLoadingValue(isLoading: Boolean) {
+        _isLoading.value = isLoading
+    }
 }
