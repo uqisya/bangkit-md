@@ -7,6 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.refactorgithubsubmissionapi.adapter.UsersListAdapter
+import com.dicoding.refactorgithubsubmissionapi.config.SettingPreferences
+import com.dicoding.refactorgithubsubmissionapi.config.dataStore
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.ItemsItem
 import com.dicoding.refactorgithubsubmissionapi.databinding.ActivityFavoriteUsersListBinding
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.FavoriteUserViewModel
@@ -32,8 +34,8 @@ class FavoriteUsersListActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this@FavoriteUsersListActivity, linearLayoutManager.orientation)
         binding.rvFavoriteUsersAccount.addItemDecoration(itemDecoration)
 
-        mainViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, MainViewModel::class.java)
-//        mainViewModel.setIsLoadingValue(false)
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        mainViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, MainViewModel::class.java, pref)
 
         mainViewModel.userDetail.observe(this@FavoriteUsersListActivity) { event ->
             event.getContentIfNotHandled()?.let { user ->
@@ -48,7 +50,7 @@ class FavoriteUsersListActivity : AppCompatActivity() {
             else binding.progressBar.visibility = View.GONE
         }
 
-        favUserViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, FavoriteUserViewModel::class.java)
+        favUserViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, FavoriteUserViewModel::class.java, pref)
 
 //        sebelum ditampilin ke recyclerview, perlu ubah dulu object dari FavoriteUser ke ItemsItem
         favUserViewModel.favoriteUsersList.observe(this@FavoriteUsersListActivity) { users ->
@@ -76,12 +78,4 @@ class FavoriteUsersListActivity : AppCompatActivity() {
             }
         })
     }
-
-//    override fun onStart() {
-//        super.onStart()
-//        if (!favUserViewModel.favoriteUsersList.value.isNullOrEmpty()) {
-//            println("debug: inside fav users list not null onStart()")
-//            binding.tvNoData.visibility = View.GONE
-//        }
-//    }
 }

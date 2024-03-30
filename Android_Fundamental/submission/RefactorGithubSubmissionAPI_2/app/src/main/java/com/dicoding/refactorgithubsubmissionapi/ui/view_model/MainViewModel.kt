@@ -4,12 +4,15 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.dicoding.refactorgithubsubmissionapi.BuildConfig
+import com.dicoding.refactorgithubsubmissionapi.config.SettingPreferences
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.DetailUserResponse
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.ItemsItem
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.QueryUserResponse
 import com.dicoding.refactorgithubsubmissionapi.data.remote.retrofit.ApiConfig
 import com.dicoding.refactorgithubsubmissionapi.util.Event
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -36,10 +39,6 @@ class MainViewModel : ViewModel() {
 
     private val _noDataVisibility = MutableLiveData<Boolean>()
     val noDataVisibility: LiveData<Boolean> = _noDataVisibility
-
-//    init {
-//        findGithubUsersListAccount(USERNAME_DEFAULT)
-//    }
 
     /*
     * mencari akun github default nya = "arif" <- username dari companion object

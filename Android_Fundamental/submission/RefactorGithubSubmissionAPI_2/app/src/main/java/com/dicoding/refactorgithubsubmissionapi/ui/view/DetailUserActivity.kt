@@ -11,6 +11,8 @@ import com.dicoding.refactorgithubsubmissionapi.R
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.DetailUserResponse
 import com.dicoding.refactorgithubsubmissionapi.databinding.ActivityDetailUserBinding
 import com.dicoding.refactorgithubsubmissionapi.adapter.SectionsPagerAdapter
+import com.dicoding.refactorgithubsubmissionapi.config.SettingPreferences
+import com.dicoding.refactorgithubsubmissionapi.config.dataStore
 import com.dicoding.refactorgithubsubmissionapi.database.FavoriteUser
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.DetailUserViewModel
 import com.dicoding.refactorgithubsubmissionapi.factory.ViewModelFactory
@@ -49,7 +51,8 @@ class DetailUserActivity : AppCompatActivity() {
             intent.getParcelableExtra<DetailUserResponse>(DATA_ACCOUNT)
         }
 
-        detailUserViewModel = ViewModelFactory.getViewModel(this@DetailUserActivity, DetailUserViewModel::class.java)
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        detailUserViewModel = ViewModelFactory.getViewModel(this@DetailUserActivity, DetailUserViewModel::class.java, pref)
         if (account != null) {
             Glide.with(this@DetailUserActivity)
                 .load(account.avatarUrl)

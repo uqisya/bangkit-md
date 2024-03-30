@@ -14,6 +14,8 @@ import com.dicoding.refactorgithubsubmissionapi.data.remote.response.ItemsItem
 import com.dicoding.refactorgithubsubmissionapi.databinding.FragmentUserFollowerFollowingBinding
 import com.dicoding.refactorgithubsubmissionapi.adapter.SectionsPagerAdapter
 import com.dicoding.refactorgithubsubmissionapi.adapter.UsersListAdapter
+import com.dicoding.refactorgithubsubmissionapi.config.SettingPreferences
+import com.dicoding.refactorgithubsubmissionapi.config.dataStore
 import com.dicoding.refactorgithubsubmissionapi.factory.ViewModelFactory
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.MainViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.UserFollowerFollowingViewModel
@@ -43,7 +45,8 @@ class UserFollowerFollowingFragment : Fragment() {
         binding.rvFollowerFollowingAccount.addItemDecoration(itemDecoration)
 
         // dapetin ViewModel
-        userFollowerFollowingViewModel = ViewModelFactory.getViewModel(requireActivity(), UserFollowerFollowingViewModel::class.java)
+        val pref = SettingPreferences.getInstance(requireActivity().application.dataStore)
+        userFollowerFollowingViewModel = ViewModelFactory.getViewModel(requireActivity(), UserFollowerFollowingViewModel::class.java, pref)
 //        no need -> ViewModelProvider(requireActivity())[UserFollowerFollowingViewModel::class.java]
 
         userFollowerFollowingViewModel.isLoading.observe(requireActivity()) { value ->

@@ -4,6 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorSurface"
     tools:context=".ui.view.UserFollowerFollowingFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -13,7 +14,7 @@
         android:padding="8dp"
         android:clipToPadding="false"
         android:visibility="visible"
-        android:background="@android:color/white"
+        android:background="?attr/colorSurface"
         tools:listitem="@layout/item_user"
         android:scrollbars="vertical" />
 

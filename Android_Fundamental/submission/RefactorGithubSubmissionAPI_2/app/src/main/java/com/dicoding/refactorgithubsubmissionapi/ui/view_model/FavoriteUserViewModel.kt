@@ -12,7 +12,6 @@ class FavoriteUserViewModel(application: Application) : ViewModel() {
     val favoriteUsersList: LiveData<List<FavoriteUser>>
     private val mFavoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(application)
     init {
-        println("debug: call FavoriteUserViewModel, getAllFavoriteUsers()")
         favoriteUsersList = getAllFavoriteUsers()
     }
 

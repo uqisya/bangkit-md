@@ -9,6 +9,7 @@ import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +17,13 @@ import com.dicoding.refactorgithubsubmissionapi.R
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.ItemsItem
 import com.dicoding.refactorgithubsubmissionapi.databinding.ActivityMainBinding
 import com.dicoding.refactorgithubsubmissionapi.adapter.UsersListAdapter
+import com.dicoding.refactorgithubsubmissionapi.config.SettingPreferences
+import com.dicoding.refactorgithubsubmissionapi.config.dataStore
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.FavoriteUserViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.MainViewModel
 import com.dicoding.refactorgithubsubmissionapi.factory.ViewModelFactory
+import com.dicoding.refactorgithubsubmissionapi.ui.view_model.ConfigViewModel
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,8 +53,12 @@ class MainActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this@MainActivity, linearLayoutManager.orientation)
         binding.rvListGithubAccount.addItemDecoration(itemDecoration)
 
+        val pref = SettingPreferences.getInstance(application.dataStore)
+        val configViewModel = ViewModelFactory.getViewModel(this@MainActivity, ConfigViewModel::class.java, pref)
+        observeConfigTheme(configViewModel)
+
         // dapetin ViewModel
-        mainViewModel =  ViewModelFactory.getViewModel(this@MainActivity, MainViewModel::class.java)
+        mainViewModel =  ViewModelFactory.getViewModel(this@MainActivity, MainViewModel::class.java, pref)
 //        ga diperluin lagi, udah pakai factory <- ViewModelProvider(this@MainActivity, ViewModelProvider.NewInstanceFactory())[MainViewModel::class.java]
 
 //        resolve the get request "arif" everytime initialize mainViewModel (because of the init)
@@ -153,5 +162,15 @@ class MainActivity : AppCompatActivity() {
             startActivity(moveToConfigIntent)
             true
         } else super.onOptionsItemSelected(item)
+    }
+
+    private fun observeConfigTheme(configViewModel: ConfigViewModel) {
+        configViewModel.configTheme.observe(this@MainActivity) { isDarkModeActive: Boolean ->
+            if (isDarkModeActive) {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            } else {
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
     }
 }
