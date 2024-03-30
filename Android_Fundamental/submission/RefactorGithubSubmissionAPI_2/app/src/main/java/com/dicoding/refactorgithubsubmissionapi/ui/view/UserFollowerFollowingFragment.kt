@@ -14,6 +14,7 @@ import com.dicoding.refactorgithubsubmissionapi.data.remote.response.ItemsItem
 import com.dicoding.refactorgithubsubmissionapi.databinding.FragmentUserFollowerFollowingBinding
 import com.dicoding.refactorgithubsubmissionapi.adapter.SectionsPagerAdapter
 import com.dicoding.refactorgithubsubmissionapi.adapter.UsersListAdapter
+import com.dicoding.refactorgithubsubmissionapi.factory.ViewModelFactory
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.MainViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.UserFollowerFollowingViewModel
 
@@ -42,7 +43,8 @@ class UserFollowerFollowingFragment : Fragment() {
         binding.rvFollowerFollowingAccount.addItemDecoration(itemDecoration)
 
         // dapetin ViewModel
-        userFollowerFollowingViewModel = ViewModelProvider(requireActivity())[UserFollowerFollowingViewModel::class.java]
+        userFollowerFollowingViewModel = ViewModelFactory.getViewModel(requireActivity(), UserFollowerFollowingViewModel::class.java)
+//        no need -> ViewModelProvider(requireActivity())[UserFollowerFollowingViewModel::class.java]
 
         userFollowerFollowingViewModel.isLoading.observe(requireActivity()) { value ->
             if (value == true) binding.progressBar.visibility = View.VISIBLE
@@ -90,6 +92,11 @@ class UserFollowerFollowingFragment : Fragment() {
                 moveDetailUserActivityIntent.putExtra("DATA", user)
                 startActivity(moveDetailUserActivityIntent)
             }
+        }
+
+        mainViewModel.isLoading.observe(requireActivity()) { value ->
+            if (value == true) binding.progressBar.visibility = View.VISIBLE
+            else binding.progressBar.visibility = View.GONE
         }
 
     }

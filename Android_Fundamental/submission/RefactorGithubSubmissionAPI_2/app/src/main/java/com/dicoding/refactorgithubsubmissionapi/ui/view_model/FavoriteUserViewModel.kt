@@ -9,9 +9,13 @@ import com.dicoding.refactorgithubsubmissionapi.repository.FavoriteUserRepositor
 
 class FavoriteUserViewModel(application: Application) : ViewModel() {
 
+    val favoriteUsersList: LiveData<List<FavoriteUser>>
     private val mFavoriteUserRepository: FavoriteUserRepository = FavoriteUserRepository(application)
+    init {
+        favoriteUsersList = getAllFavoriteUsers()
+    }
 
-    fun getAllFavoriteUsers(): LiveData<List<FavoriteUser>> {
+    private fun getAllFavoriteUsers(): LiveData<List<FavoriteUser>> {
         return mFavoriteUserRepository.getAllFavoriteUsers()
     }
 }

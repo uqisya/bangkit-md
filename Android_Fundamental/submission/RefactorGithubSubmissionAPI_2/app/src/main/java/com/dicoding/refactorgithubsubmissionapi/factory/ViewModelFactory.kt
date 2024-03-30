@@ -1,11 +1,9 @@
-package com.dicoding.refactorgithubsubmissionapi.ui.view_model_factory
+package com.dicoding.refactorgithubsubmissionapi.factory
 
 import android.app.Application
-import android.content.Context
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.room.Room
-import com.dicoding.refactorgithubsubmissionapi.database.FavoriteUserRoomDatabase
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.DetailUserViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.FavoriteUserViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.MainViewModel
@@ -18,13 +16,18 @@ class ViewModelFactory(private val mApplication: Application) : ViewModelProvide
         private var INSTANCE: ViewModelFactory? = null
 
         @JvmStatic
-        fun getDatabaseInstance(application: Application): ViewModelFactory {
+        fun getInstance(application: Application): ViewModelFactory {
             if (INSTANCE == null) {
                 synchronized(ViewModelFactory::class.java) {
                     INSTANCE = ViewModelFactory(application)
                 }
             }
             return INSTANCE as ViewModelFactory
+        }
+
+        fun <T: ViewModel> getViewModel(activity: FragmentActivity, modelClass: Class<T>): T {
+            val factory = ViewModelFactory.getInstance(activity.application)
+            return ViewModelProvider(activity, factory)[modelClass]
         }
     }
 

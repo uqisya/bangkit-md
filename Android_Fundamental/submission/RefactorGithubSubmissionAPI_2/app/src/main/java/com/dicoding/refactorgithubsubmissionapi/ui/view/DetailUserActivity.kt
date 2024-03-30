@@ -5,9 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.StringRes
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
 import com.dicoding.refactorgithubsubmissionapi.R
@@ -16,8 +13,7 @@ import com.dicoding.refactorgithubsubmissionapi.databinding.ActivityDetailUserBi
 import com.dicoding.refactorgithubsubmissionapi.adapter.SectionsPagerAdapter
 import com.dicoding.refactorgithubsubmissionapi.database.FavoriteUser
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.DetailUserViewModel
-import com.dicoding.refactorgithubsubmissionapi.ui.view_model.FavoriteUserViewModel
-import com.dicoding.refactorgithubsubmissionapi.ui.view_model_factory.ViewModelFactory
+import com.dicoding.refactorgithubsubmissionapi.factory.ViewModelFactory
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -53,7 +49,7 @@ class DetailUserActivity : AppCompatActivity() {
             intent.getParcelableExtra<DetailUserResponse>(DATA_ACCOUNT)
         }
 
-        detailUserViewModel = getViewModel(this@DetailUserActivity)
+        detailUserViewModel = ViewModelFactory.getViewModel(this@DetailUserActivity, DetailUserViewModel::class.java)
         if (account != null) {
             Glide.with(this@DetailUserActivity)
                 .load(account.avatarUrl)
@@ -89,11 +85,6 @@ class DetailUserActivity : AppCompatActivity() {
                 showToast("Success add user to favorite list")
             }
         }
-    }
-
-    private fun getViewModel(activity: AppCompatActivity): DetailUserViewModel {
-        val factory = ViewModelFactory.getDatabaseInstance(activity.application)
-        return ViewModelProvider(activity, factory)[DetailUserViewModel::class.java]
     }
 
     private fun showToast(msg: String) {

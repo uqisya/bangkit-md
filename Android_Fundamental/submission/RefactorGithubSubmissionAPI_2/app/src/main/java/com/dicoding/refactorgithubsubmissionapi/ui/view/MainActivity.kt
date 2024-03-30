@@ -6,16 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.ItemsItem
 import com.dicoding.refactorgithubsubmissionapi.databinding.ActivityMainBinding
 import com.dicoding.refactorgithubsubmissionapi.adapter.UsersListAdapter
-import com.dicoding.refactorgithubsubmissionapi.ui.view_model.DetailUserViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.FavoriteUserViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.MainViewModel
-import com.dicoding.refactorgithubsubmissionapi.ui.view_model_factory.ViewModelFactory
+import com.dicoding.refactorgithubsubmissionapi.factory.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,9 +41,14 @@ class MainActivity : AppCompatActivity() {
         binding.rvListGithubAccount.addItemDecoration(itemDecoration)
 
         // dapetin ViewModel
-        mainViewModel =  getViewModel(this@MainActivity)
-//        ga diperluin lagi, udah pakai factory
-//            ViewModelProvider(this@MainActivity, ViewModelProvider.NewInstanceFactory())[MainViewModel::class.java]
+        mainViewModel =  ViewModelFactory.getViewModel(this@MainActivity, MainViewModel::class.java)
+//        ga diperluin lagi, udah pakai factory <- ViewModelProvider(this@MainActivity, ViewModelProvider.NewInstanceFactory())[MainViewModel::class.java]
+
+//        resolve the get request "arif" everytime initialize mainViewModel (because of the init)
+//        so I decided to call it once at the beginning application started
+        if (mainViewModel.usersList.value == null) {
+            mainViewModel.findGithubUsersListAccount("arif")
+        }
 
         /*
         * kalo ada perubahan data di isLoading (MainViewModel), maka bakal lakuin blok kode yg ada di observe
@@ -105,17 +108,11 @@ class MainActivity : AppCompatActivity() {
                 }
         }
 
-        val items = arrayListOf<ItemsItem>()
         binding.fabFavoriteUsersList.setOnClickListener {
             val moveFavoriteUsersListActivityIntent = Intent(this@MainActivity, FavoriteUsersListActivity::class.java)
             startActivity(moveFavoriteUsersListActivityIntent)
         }
 
-    }
-
-    private fun getViewModel(activity: AppCompatActivity): MainViewModel {
-        val factory = ViewModelFactory.getDatabaseInstance(activity.application)
-        return ViewModelProvider(activity, factory)[MainViewModel::class.java]
     }
 
     private fun setUsersListDataToRecyclerView(usersListAccount: List<ItemsItem?>?) {

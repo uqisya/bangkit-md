@@ -37,15 +37,16 @@ class MainViewModel : ViewModel() {
     private val _noDataVisibility = MutableLiveData<Boolean>()
     val noDataVisibility: LiveData<Boolean> = _noDataVisibility
 
-    init {
-        findGithubUsersListAccount(USERNAME_DEFAULT)
-    }
+//    init {
+//        findGithubUsersListAccount(USERNAME_DEFAULT)
+//    }
 
     /*
     * mencari akun github default nya = "arif" <- username dari companion object
     * dia bakal mengubah/assign data baru dari hasil response.body() ke _usersList
      */
     internal fun findGithubUsersListAccount(usernameQuery: String){
+
         _isLoading.value = true // ubah progress bar jadi visible
         _noDataVisibility.value = false  // gone
 

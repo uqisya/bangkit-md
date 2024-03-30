@@ -1,24 +1,17 @@
 package com.dicoding.refactorgithubsubmissionapi.ui.view
 
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.dicoding.refactorgithubsubmissionapi.R
 import com.dicoding.refactorgithubsubmissionapi.adapter.UsersListAdapter
-import com.dicoding.refactorgithubsubmissionapi.data.remote.response.DetailUserResponse
 import com.dicoding.refactorgithubsubmissionapi.data.remote.response.ItemsItem
 import com.dicoding.refactorgithubsubmissionapi.databinding.ActivityFavoriteUsersListBinding
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.FavoriteUserViewModel
 import com.dicoding.refactorgithubsubmissionapi.ui.view_model.MainViewModel
-import com.dicoding.refactorgithubsubmissionapi.ui.view_model_factory.ViewModelFactory
+import com.dicoding.refactorgithubsubmissionapi.factory.ViewModelFactory
 
 class FavoriteUsersListActivity : AppCompatActivity() {
 
@@ -39,7 +32,8 @@ class FavoriteUsersListActivity : AppCompatActivity() {
         val itemDecoration = DividerItemDecoration(this@FavoriteUsersListActivity, linearLayoutManager.orientation)
         binding.rvFavoriteUsersAccount.addItemDecoration(itemDecoration)
 
-        mainViewModel = getViewModel(this@FavoriteUsersListActivity, MainViewModel::class.java)
+        mainViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, MainViewModel::class.java)
+
         mainViewModel.userDetail.observe(this@FavoriteUsersListActivity) { event ->
             event.getContentIfNotHandled()?.let { user ->
                 val moveDetailUserActivityIntent = Intent(this@FavoriteUsersListActivity, DetailUserActivity::class.java)
@@ -48,9 +42,14 @@ class FavoriteUsersListActivity : AppCompatActivity() {
             }
         }
 
-        favUserViewModel = getViewModel(this@FavoriteUsersListActivity, FavoriteUserViewModel::class.java)
+        mainViewModel.isLoading.observe(this@FavoriteUsersListActivity) { value ->
+            if (value == true) binding.progressBar.visibility = View.VISIBLE
+            else binding.progressBar.visibility = View.GONE
+        }
+
+        favUserViewModel = ViewModelFactory.getViewModel(this@FavoriteUsersListActivity, FavoriteUserViewModel::class.java)
 //        sebelum ditampilin ke recyclerview, perlu ubah dulu object dari FavoriteUser ke ItemsItem
-        favUserViewModel.getAllFavoriteUsers().observe(this@FavoriteUsersListActivity) { users ->
+        favUserViewModel.favoriteUsersList.observe(this@FavoriteUsersListActivity) { users ->
             val items = arrayListOf<ItemsItem>()
             users.map {  user ->
                 val item = ItemsItem(login = user.username, avatarUrl = user.avatarUrl)
@@ -58,11 +57,6 @@ class FavoriteUsersListActivity : AppCompatActivity() {
             }
             setUsersListDataToRecyclerView(items.toList())
         }
-    }
-
-    private fun <T: ViewModel> getViewModel(activity: AppCompatActivity, modelClass: Class<T>): T {
-        val factory = ViewModelFactory.getDatabaseInstance(activity.application)
-        return ViewModelProvider(activity, factory)[modelClass]
     }
 
     private fun setUsersListDataToRecyclerView(usersListAccount: List<ItemsItem>) {
