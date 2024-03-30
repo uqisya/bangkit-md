@@ -12,4 +12,6 @@
     <string name="no_data">No data</string>
     <string name="add_to_favorite">add to favorite</string>
     <string name="list_favorite_user">List Favorite User</string>
+    <string name="config_page">Setting (Configuration)</string>
+    <string name="dark_mode">Dark Mode</string>
 </resources>

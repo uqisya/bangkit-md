@@ -15,6 +15,9 @@
         android:theme="@style/Theme.RefactorGithubSubmissionAPI"
         tools:targetApi="31">
         <activity
+            android:name=".ui.view.ConfigActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.view.FavoriteUsersListActivity"
             android:exported="false" />
         <activity
