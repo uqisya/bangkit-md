@@ -1,5 +1,8 @@
 *.iml
 .gradle
+/Android_Fundamental
+/Android_Pemula
+/Applied_Machine_Learning
 /local.properties
 /.idea/caches
 /.idea/libraries
