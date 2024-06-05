@@ -1,13 +1,14 @@
-package com.dicoding.storyappsubmission.view.helper
+package com.dicoding.storyappsubmission.helper
 
 import android.content.Context
+import android.graphics.Canvas
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.AttributeSet
-import android.util.Patterns
+import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 
-class CustomEmailEditText @JvmOverloads constructor(
+class CustomPasswordEditText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : AppCompatEditText(context, attrs) {
 
@@ -23,7 +24,7 @@ class CustomEmailEditText @JvmOverloads constructor(
             }
 
             override fun afterTextChanged(s: Editable?) {
-                error = if (s!= null && !Patterns.EMAIL_ADDRESS.matcher(s).matches()) "Invalid email address"
+                error = if (s != null && s.length < 8) "Password harus memiliki setidaknya 8 karakter lebih"
                 else null
             }
 

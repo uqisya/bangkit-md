@@ -72,7 +72,7 @@
         app:layout_constraintTop_toBottomOf="@+id/emailTextView"
         app:startIconDrawable="@drawable/ic_baseline_email_24">
 
-        <com.dicoding.storyappsubmission.view.helper.CustomEmailEditText
+        <com.dicoding.storyappsubmission.helper.CustomEmailEditText
             android:id="@+id/emailEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -108,7 +108,7 @@
         app:layout_constraintTop_toBottomOf="@+id/passwordTextView"
         app:startIconDrawable="@drawable/ic_baseline_password_24" >
 
-        <com.dicoding.storyappsubmission.view.helper.CustomPasswordEditText
+        <com.dicoding.storyappsubmission.helper.CustomPasswordEditText
             android:id="@+id/passwordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
