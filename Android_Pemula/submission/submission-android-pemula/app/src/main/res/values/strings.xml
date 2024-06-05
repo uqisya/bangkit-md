@@ -1,0 +1,93 @@
+<resources>
+    <string name="app_name">MySubmission</string>
+    <string name="profile_page">About Page</string>
+    <string name="profile_name">Muhammad Syauqi Frizman</string>
+    <string name="profile_email">syauqifrizman@gmail.com</string>
+
+    <string name="donut_name">Nama Donut</string>
+    <string name="donut_price">Harga Donut</string>
+    <string name="donut_desc_list">Deskripsi Donut Overview</string>
+    <string name="label_stock">Stock Donut:</string>
+    <string name="donut_detail_stock">Stok</string>
+    <string name="label_desc">Description</string>
+
+    <string name="btn_shareable">Share</string>
+    <string name="label_promo">Latest Promo</string>
+    <string name="label_click_promo">[click picture for more detail]</string>
+
+    <string-array name="data_donut_name">
+        <item>Alcapone</item>
+        <item>Avocado Dicaprio</item>
+        <item>Berry Spears</item>
+        <item>Black Jack</item>
+        <item>Blue Berrymore</item>
+        <item>Caviar Chocolate</item>
+        <item>Caviar Strawberry</item>
+        <item>Cheese Cakelicious</item>
+        <item>Chocolate Rainbow</item>
+        <item>Coco Loco</item>
+        <item>Copa Banana</item>
+        <item>Crunchy Crunchy</item>
+    </string-array>
+
+    <string-array name="data_donut_price">
+        <item>Rp8.000</item>
+        <item>Rp8.000</item>
+        <item>Rp10.000</item>
+        <item>Rp10.000</item>
+        <item>Rp12.000</item>
+        <item>Rp12.000</item>
+        <item>Rp12.000</item>
+        <item>Rp14.000</item>
+        <item>Rp16.000</item>
+        <item>Rp16.000</item>
+        <item>Rp16.000</item>
+        <item>Rp18.000</item>
+    </string-array>
+
+    <string-array name="data_donut_desc">
+        <item>Donut is generously covered, presenting a delightful contrast between the smooth, creamy texture of the white chocolate and the crunchy, golden-brown almonds. Each almond slice catches the light differently, showcasing varying shades of golden brown that are a testament to their perfect toastiness. The meticulous arrangement of the almond slices not only adds to the aesthetic appeal but also promises an even distribution of crunch in every bite.</item>
+        <item>Donut filled with avocado cream, dipped in avocado chocolate, and garnished with dark chocolate flakes, offering a unique blend of sweet and savory flavors that tantalize the taste buds. The avocado cream filling is smooth and rich, providing a refreshing contrast to the sweetness of the chocolate. The avocado chocolate coating is a creative twist, adding a subtle, earthy flavor that complements the creaminess of the filling. Enjoy this donut with a cup of coffee for a perfect afternoon snack! 😊</item>
+        <item>Donut filled with whipped cream cheese, dipped in strawberry jam, and garnished with white chocolate flakes. The whipped cream cheese filling is light and airy, providing a delightful contrast to the rich and sweet strawberry jam. The jam, with its vibrant red color and glossy texture, adds a fruity tanginess that cuts through the richness of the cream cheese. The garnish of white chocolate flakes adds a final touch of sweetness and a hint of crunch, enhancing the overall eating experience.</item>
+        <item>Donut fully encased in dark chocolate. The donut is completely covered in a glossy, rich dark chocolate glaze, which gives it an enticing and decadent appearance. The dark chocolate not only adds a sweet and slightly bitter flavor to the donut, but also provides a satisfying crunch when bitten into. The contrast between the soft, fluffy donut and the hard chocolate shell makes for a delightful texture combination.</item>
+        <item>Donut filled with whipped cream cheese, dipped in blueberry jam, and garnished with white chocolate flakes, is a delightful treat that combines a variety of flavors and textures. The whipped cream cheese filling is light and airy, providing a creamy contrast to the sweet and tangy blueberry jam. The jam, with its vibrant color and fruity flavor, adds a layer of complexity to the donut, making each bite a burst of sweetness that is perfectly balanced by the richness of the cream cheese. The garnish of white chocolate flakes adds a final touch of sweetness and a hint of crunch, enhancing the overall eating experience.</item>
+        <item>Donut dipped in hazelnut chocolate and sprinkled with dark chocolate coated crisps. The donut is completely covered in a glossy, rich hazelnut chocolate glaze, which gives it an enticing and decadent appearance. The dark chocolate crisps add a satisfying crunch and a hint of bitterness, balancing out the sweetness of the hazelnut chocolate. This combination of flavors and textures makes for a truly indulgent treat. Whether enjoyed as a dessert, a snack, or a sweet breakfast treat, this hazelnut chocolate-dipped donut with dark chocolate crisps is sure to satisfy any chocolate lover’s cravings.</item>
+        <item>Donut dipped in strawberry milk chocolate and sprinkled with dark chocolate coated crisps, is a delightful treat that combines a variety of flavors and textures. The strawberry milk chocolate provides a sweet and fruity flavor that is perfectly balanced by the richness of the dark chocolate crisps. The crisps add a satisfying crunch and a hint of bitterness, enhancing the overall eating experience. This donut is not just a dessert, but a culinary masterpiece that offers a symphony of flavors and textures, making it a perfect treat for any time of the day.</item>
+        <item>Donut filled with whipped cream cheese, dipped in white chocolate, topped with cookie crumbs, and garnished with white chocolate, is a symphony of flavors and textures that promises a delightful experience with each bite. The whipped cream cheese filling is light and airy, providing a creamy contrast to the sweet and rich white chocolate coating. The cookie crumbs add a satisfying crunch, enhancing the overall texture and taste of the donut. The additional garnish of white chocolate shavings not only adds an extra layer of sweetness but also makes the donut visually appealing. This donut is not just a dessert, but a culinary masterpiece that offers a unique combination of flavors and textures, making it a perfect treat for any time of the day.</item>
+        <item>Donut dipped in white chocolate, sprinkled with crushed toasted almonds, and garnished with strawberry jam, is a culinary delight that combines a variety of flavors and textures. The white chocolate provides a sweet and creamy base that is beautifully contrasted by the nutty crunch of the toasted almonds. The strawberry jam adds a layer of fruity tanginess, balancing out the richness of the chocolate and nuts. Each bite of this donut promises a symphony of flavors - the sweetness of the chocolate, the crunchiness of the almonds, and the tanginess of the jam.</item>
+        <item>Donut filled with dark chocolate ganache and dipped in dark chocolate, is a decadent treat that promises an indulgent experience with each bite. The rich, velvety ganache filling provides a burst of intense chocolate flavor that is beautifully complemented by the slightly bitter dark chocolate coating. The contrast between the soft, fluffy donut and the hard chocolate shell creates a delightful texture combination that enhances the overall eating experience. This donut is not just a dessert, but a culinary masterpiece that offers a symphony of flavors and textures.</item>
+        <item>Donut filled with banana custard cream, dipped in dark chocolate, and garnished with a dollop of banana custard cream, is a delightful treat that combines a variety of flavors and textures. The banana custard cream filling is light and airy, providing a creamy contrast to the rich and bitter dark chocolate coating. The dollop of banana custard cream on top not only adds an extra layer of flavor but also gives the donut a visually appealing finish. Each bite of this donut promises a symphony of flavors - the sweetness of the banana custard cream, the bitterness of the dark chocolate, and the softness of the donut dough.</item>
+        <item>Donut dipped in milk chocolate and topped with chocolate cornflakes, is a delightful treat that combines a variety of flavors and textures. The milk chocolate provides a sweet and creamy base that is beautifully contrasted by the crunchy texture of the chocolate cornflakes. Each bite of this donut promises a symphony of flavors - the sweetness of the milk chocolate, the crunchiness of the cornflakes, and the softness of the donut dough. This donut is not just a dessert, but a culinary masterpiece that offers a unique combination of flavors and textures, making it a perfect treat for any time of the day.</item>
+    </string-array>
+
+    <integer-array name="data_donut_photo">
+        <item>@drawable/alcapone</item>
+        <item>@drawable/avocado_dicaprio</item>
+        <item>@drawable/berry_spears</item>
+        <item>@drawable/black_jack</item>
+        <item>@drawable/blue_berrymore</item>
+        <item>@drawable/caviar_chocolate</item>
+        <item>@drawable/caviar_strawberry</item>
+        <item>@drawable/cheese_cakelicious</item>
+        <item>@drawable/chocolate_rainbow</item>
+        <item>@drawable/coco_loco</item>
+        <item>@drawable/copa_banana</item>
+        <item>@drawable/crunchy_crunchy</item>
+    </integer-array>
+
+    <string-array name="data_donut_stock">
+        <item>45</item>
+        <item>24</item>
+        <item>82</item>
+        <item>60</item>
+        <item>76</item>
+        <item>12</item>
+        <item>79</item>
+        <item>21</item>
+        <item>36</item>
+        <item>92</item>
+        <item>88</item>
+        <item>100</item>
+    </string-array>
+
+</resources>
