@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">SnapStory</string>
+    <string name="title_login_page">Selamat Datang di SnapStory!</string>
+    <string name="subtitle_login_page">Hai! Selamat datang kembali di SnapStory. Silahkan login untuk melanjutkan.</string>
+    <string name="label_email">Email</string>
+    <string name="label_password">Password</string>
+    <string name="label_login">Login</string>
+    <string name="title_signup_page">Daftarkan Akun Baru Kamu Yuk!</string>
+    <string name="subtitle_signup_page">Coba SnapStory yuk!\nBuat akun baru kamu dulu ya!</string>
+    <string name="label_name">Nama</string>
+    <string name="label_signup">Signup</string>
+    <string name="placeholder_password">Masukkan password anda</string>
+    <string name="placeholder_email">Masukkan email anda</string>
+    <string name="placeholder_name">Masukkan nama anda</string>
+</resources>
