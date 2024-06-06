@@ -63,4 +63,7 @@ dependencies {
     implementation(libs.logging.interceptor)
 
     implementation(libs.androidx.lifecycle.runtime.ktx) // untuk lifecycleScope
+    implementation(libs.androidx.lifecycle.viewmodel.ktx) // untuk viewmodelScope)
+
+    implementation(libs.androidx.datastore.preferences)  // untuk dataStore, simpan token login
 }

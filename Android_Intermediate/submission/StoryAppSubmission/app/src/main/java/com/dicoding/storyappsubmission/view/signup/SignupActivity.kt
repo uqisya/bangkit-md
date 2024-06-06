@@ -2,26 +2,26 @@ package com.dicoding.storyappsubmission.view.signup
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
-import com.dicoding.storyappsubmission.R
-import com.dicoding.storyappsubmission.data.local.model.UserModel
-import com.dicoding.storyappsubmission.data.remote.response.ErrorResponse
-import com.dicoding.storyappsubmission.data.remote.retrofit.ApiConfig
+import androidx.lifecycle.ViewModelProvider
+import com.dicoding.storyappsubmission.data.ResultState
+import com.dicoding.storyappsubmission.data.model.UserModel
 import com.dicoding.storyappsubmission.databinding.ActivitySignupBinding
-import com.google.gson.Gson
-import kotlinx.coroutines.launch
-import retrofit2.HttpException
+import com.dicoding.storyappsubmission.utils.showToast
+import com.dicoding.storyappsubmission.viewmodel.ViewModelFactory
 
 class SignupActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignupBinding
+    private lateinit var viewModel: SignupViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignupBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        val viewModelFactory= ViewModelFactory.getInstance(this@SignupActivity)
+        viewModel = ViewModelProvider(this, viewModelFactory)[SignupViewModel::class.java]
 
         binding.signupButton.setOnClickListener {
             registerAccount()
@@ -29,36 +29,28 @@ class SignupActivity : AppCompatActivity() {
     }
 
     private fun registerAccount() {
-        showLoading(true)
+        val user = getDataUserFromForm()
 
-        // use lifecycleScope because we use suspend function in the ApiService.registerAccount
-        // but if you just use regular function (not used suspend function), you can use enqueue callback, and it will need to override onResponse and onFailure
-        lifecycleScope.launch {
-            try {
-                val user = getDataUserFromForm()
-
-                // nanti harus dibuat kayak gini yaaa
-//                val message = repository.register(name, email, password).message
-
-                val apiService = ApiConfig.getApiService()
-                val successResponse = apiService.registerAccount(
-                    user.name,
-                    user.email,
-                    user.password
-                )
-
-                showLoading(false)
-                showToast(successResponse.message)
-            } catch (e: HttpException) {
-                val errorResponse = e.response()?.errorBody()?.string()
-                val errorBody = Gson().fromJson(errorResponse, ErrorResponse::class.java)
-                showLoading(false)
-                errorBody.message?.let { msg ->
-                    showToast(msg)
+        viewModel.registerAccount(user).observe(this@SignupActivity) { resultState ->
+            if (resultState != null) {
+                when (resultState) {
+                    is ResultState.Loading -> {
+                        binding.progressBar.visibility = View.VISIBLE
+                        binding.signupButton.isEnabled = false
+                    }
+                    is ResultState.Success -> {
+                        binding.progressBar.visibility = View.GONE
+                        binding.signupButton.isEnabled = true
+                        showToast(this@SignupActivity, resultState.data.message)
+                    }
+                    is ResultState.Error -> {
+                        binding.progressBar.visibility = View.GONE
+                        binding.signupButton.isEnabled = true
+                        showToast(this@SignupActivity, resultState.errorMessage)
+                    }
                 }
             }
         }
-
     }
 
     private fun getDataUserFromForm(): UserModel {
@@ -68,12 +60,4 @@ class SignupActivity : AppCompatActivity() {
         return UserModel(name, email, password)
     }
 
-    private fun showLoading(isLoading: Boolean) {
-        if (isLoading) binding.progressBar.visibility = View.VISIBLE
-        else binding.progressBar.visibility = View.GONE
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
-    }
 }

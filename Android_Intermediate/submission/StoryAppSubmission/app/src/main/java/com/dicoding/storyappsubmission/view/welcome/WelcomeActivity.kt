@@ -1,21 +1,57 @@
 package com.dicoding.storyappsubmission.view.welcome
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyappsubmission.R
+import com.dicoding.storyappsubmission.databinding.ActivityWelcomeBinding
+import com.dicoding.storyappsubmission.view.login.LoginActivity
+import com.dicoding.storyappsubmission.view.login.LoginViewModel
+import com.dicoding.storyappsubmission.view.main.MainActivity
+import com.dicoding.storyappsubmission.view.signup.SignupActivity
+import com.dicoding.storyappsubmission.viewmodel.ViewModelFactory
 
 class WelcomeActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityWelcomeBinding
+
+    private lateinit var loginViewModel: LoginViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_welcome)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityWelcomeBinding.inflate(layoutInflater)
+
+        val viewModelFactory = ViewModelFactory.getInstance(this@WelcomeActivity)
+        loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
+
+        loginViewModel.getAuthToken().observe(this@WelcomeActivity) { authToken ->
+            println("hei ini welcome")
+            if (authToken != null) {
+                startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
+                finish()
+            } else {
+                setContentView(binding.root)
+            }
+        }
+
+        // Set the alpha of the buttons and the title to 1 to make them visible
+        binding.loginButton.alpha = 1f
+        binding.signupButton.alpha = 1f
+        binding.titleTextView.alpha = 1f
+        binding.descTextView.alpha = 1f
+
+        binding.loginButton.setOnClickListener {
+            val intent = Intent(this@WelcomeActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.signupButton.setOnClickListener {
+            val intent = Intent(this@WelcomeActivity, SignupActivity::class.java)
+            startActivity(intent)
         }
     }
 }

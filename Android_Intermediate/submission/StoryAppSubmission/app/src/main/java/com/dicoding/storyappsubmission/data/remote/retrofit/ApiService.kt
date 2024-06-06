@@ -1,5 +1,6 @@
 package com.dicoding.storyappsubmission.data.remote.retrofit
 
+import com.dicoding.storyappsubmission.data.remote.response.LoginResponse
 import com.dicoding.storyappsubmission.data.remote.response.RegisterResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -16,4 +17,11 @@ interface ApiService {
         @Field("email") email: String,
         @Field("password") password: String
     ) : RegisterResponse
+
+    @FormUrlEncoded
+    @POST("login")
+    suspend fun loginAccount(
+        @Field("email") email: String,
+        @Field("password") password: String
+    ) : LoginResponse
 }

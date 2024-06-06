@@ -1,4 +1,4 @@
-package com.dicoding.storyappsubmission.data.local.model
+package com.dicoding.storyappsubmission.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

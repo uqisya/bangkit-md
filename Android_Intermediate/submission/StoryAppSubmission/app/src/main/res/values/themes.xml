@@ -13,7 +13,7 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="ButtonActive" parent="Theme.StoryAppSubmission">
+    <style name="ButtonActive" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">@color/background_dark_blue</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textStyle">bold</item>
