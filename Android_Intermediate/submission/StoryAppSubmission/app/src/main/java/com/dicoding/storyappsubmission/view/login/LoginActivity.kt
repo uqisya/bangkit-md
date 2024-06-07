@@ -8,11 +8,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.databinding.ActivityLoginBinding
-import com.dicoding.storyappsubmission.utils.UserPreferences
 import com.dicoding.storyappsubmission.utils.showToast
-import com.dicoding.storyappsubmission.view.main.MainActivity
 import com.dicoding.storyappsubmission.view.welcome.WelcomeActivity
-import com.dicoding.storyappsubmission.viewmodel.ViewModelFactory
+import com.dicoding.storyappsubmission.factory.ViewModelFactory
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {

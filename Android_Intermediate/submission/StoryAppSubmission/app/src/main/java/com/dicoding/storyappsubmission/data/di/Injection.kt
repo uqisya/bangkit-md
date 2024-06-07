@@ -1,13 +1,23 @@
 package com.dicoding.storyappsubmission.data.di
 
+import android.content.Context
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiConfig
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiService
 import com.dicoding.storyappsubmission.data.repository.LoginRepository
 import com.dicoding.storyappsubmission.data.repository.SignupRepository
+import com.dicoding.storyappsubmission.data.repository.StoryRepository
+import com.dicoding.storyappsubmission.utils.UserPreferences
+import com.dicoding.storyappsubmission.utils.dataStore
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 
 object Injection {
     private fun provideApiService(): ApiService {
         return ApiConfig.getApiService()
+    }
+
+    private fun provideApiServiceToken(authToken: String): ApiService {
+        return ApiConfig.getApiService(authToken)
     }
 
     fun provideSignupRepository(): SignupRepository {
@@ -18,6 +28,19 @@ object Injection {
     fun provideLoginRepository(): LoginRepository {
         val apiService = provideApiService()
         return LoginRepository.getInstance(apiService)
+    }
+
+    fun provideStoryRepository(context: Context): StoryRepository {
+        val userPref = UserPreferences.getInstance(context.dataStore)
+        val userToken = runBlocking {
+            userPref.getAuthToken().first()
+        }
+
+        val apiService = userToken?.let { authToken ->
+            provideApiServiceToken(authToken)
+        }
+        if (apiService != null) return StoryRepository.getInstance(apiService, userPref)
+        else throw IllegalStateException("User auth token is null")
     }
 
 }

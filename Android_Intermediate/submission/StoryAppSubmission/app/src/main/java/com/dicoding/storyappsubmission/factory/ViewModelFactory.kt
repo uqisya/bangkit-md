@@ -1,12 +1,11 @@
-package com.dicoding.storyappsubmission.viewmodel
+package com.dicoding.storyappsubmission.factory
 
-import android.app.Activity
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyappsubmission.data.di.Injection
-import com.dicoding.storyappsubmission.data.repository.SignupRepository
 import com.dicoding.storyappsubmission.utils.UserPreferences
+import com.dicoding.storyappsubmission.utils.dataStore
 import com.dicoding.storyappsubmission.view.login.LoginViewModel
 import com.dicoding.storyappsubmission.view.main.MainViewModel
 import com.dicoding.storyappsubmission.view.signup.SignupViewModel
@@ -19,12 +18,12 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             }
 
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                val userPreferences = UserPreferences.getInstance(context)
+                val userPreferences = UserPreferences.getInstance(context.dataStore)
                 LoginViewModel(Injection.provideLoginRepository(), userPreferences) as T
             }
 
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
-                val userPreferences = UserPreferences.getInstance(context)
+                val userPreferences = UserPreferences.getInstance(context.dataStore)
                 MainViewModel(userPreferences) as T
             }
 

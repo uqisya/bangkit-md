@@ -2,18 +2,14 @@ package com.dicoding.storyappsubmission.view.welcome
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.storyappsubmission.R
 import com.dicoding.storyappsubmission.databinding.ActivityWelcomeBinding
 import com.dicoding.storyappsubmission.view.login.LoginActivity
 import com.dicoding.storyappsubmission.view.login.LoginViewModel
 import com.dicoding.storyappsubmission.view.main.MainActivity
 import com.dicoding.storyappsubmission.view.signup.SignupActivity
-import com.dicoding.storyappsubmission.viewmodel.ViewModelFactory
+import com.dicoding.storyappsubmission.factory.ViewModelFactory
 
 class WelcomeActivity : AppCompatActivity() {
 
