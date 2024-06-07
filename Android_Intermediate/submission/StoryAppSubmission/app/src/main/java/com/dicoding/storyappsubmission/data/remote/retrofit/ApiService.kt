@@ -2,12 +2,14 @@ package com.dicoding.storyappsubmission.data.remote.retrofit
 
 import com.dicoding.storyappsubmission.data.remote.response.LoginResponse
 import com.dicoding.storyappsubmission.data.remote.response.RegisterResponse
+import com.dicoding.storyappsubmission.data.remote.response.StoryDetailResponse
 import com.dicoding.storyappsubmission.data.remote.response.StoryResponse
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -33,4 +35,9 @@ interface ApiService {
     // maka buatlah di apiConfig.kt
     @GET("stories")
     suspend fun getAllStories(): StoryResponse
+
+    @GET("stories/{id}")
+    suspend fun getDetailStoryByID(
+        @Path("id") storyID: String
+    ) : StoryDetailResponse
 }

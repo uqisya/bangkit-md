@@ -4,11 +4,10 @@ import androidx.lifecycle.liveData
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.remote.response.ErrorResponse
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiService
-import com.dicoding.storyappsubmission.utils.UserPreferences
 import com.google.gson.Gson
 import retrofit2.HttpException
 
-class StoryRepository(private val apiService: ApiService) {
+class ListStoryRepository(private val apiService: ApiService) {
 
     fun getAllStories() = liveData {
         emit(ResultState.Loading)
@@ -28,10 +27,10 @@ class StoryRepository(private val apiService: ApiService) {
 
     companion object {
         @Volatile
-        private var instance: StoryRepository? = null
+        private var instance: ListStoryRepository? = null
         fun getInstance(apiService: ApiService) =
             instance ?: synchronized(this) {
-                instance ?: StoryRepository(apiService)
+                instance ?: ListStoryRepository(apiService)
             }.also { instance = it }
     }
 }

@@ -20,6 +20,7 @@ import com.dicoding.storyappsubmission.view.welcome.WelcomeActivity
 import com.dicoding.storyappsubmission.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.showToast
 import com.dicoding.storyappsubmission.view.adapter.StoryAdapter
+import com.dicoding.storyappsubmission.view.storyDetail.StoryDetailActivity
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
@@ -107,7 +108,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.listStoryRecyclerView.adapter = adapter
 
-        adapter
+        adapter.setOnItemClickListener(object : StoryAdapter.OnItemClickListener {
+            override fun onItemClick(storyItem: ListStoryItem) {
+                val intent = Intent(this@MainActivity, StoryDetailActivity::class.java)
+                intent.putExtra(StoryDetailActivity.STORY_ID, storyItem.id)
+                startActivity(intent)
+            }
+        })
     }
 
     private fun setLayoutAdapter() {

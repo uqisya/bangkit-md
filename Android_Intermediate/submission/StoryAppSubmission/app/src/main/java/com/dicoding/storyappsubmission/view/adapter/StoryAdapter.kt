@@ -19,6 +19,10 @@ class StoryAdapter : ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_
     }
 
     private lateinit var listener: OnItemClickListener
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.listener = listener
+    }
+
     override fun onBindViewHolder(holder: StoryAdapter.MyViewHolder, position: Int) {
         val storyItem = getItem(position)
         holder.bind(storyItem)
