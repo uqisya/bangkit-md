@@ -43,6 +43,8 @@ class MainActivity : AppCompatActivity() {
         setBackgroundActionBar()
         supportActionBar?.show()
 
+        setLayoutAdapter()
+
         val viewModelFactory = ViewModelFactory.getInstance(this@MainActivity)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
@@ -116,7 +118,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setBackgroundActionBar() {
         val actionBar = supportActionBar
-        val colorDrawable = ColorDrawable(resources.getColor(R.color.dark_blue_soft))
+        val colorDrawable = ColorDrawable(resources.getColor(R.color.blue_white_soft))
         actionBar?.setBackgroundDrawable(colorDrawable)
     }
 

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
         android:background="@color/blue_white_soft">
 
         <FrameLayout
@@ -28,8 +27,8 @@
                 android:id="@+id/timeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                android:background="@color/yellow_white_soft"
+                android:layout_gravity="top|end"
+                android:background="@drawable/rounded_background"
                 android:padding="8dp"
                 android:text="@string/date_story"
                 android:textColor="@color/background_dark_blue" />
@@ -44,17 +43,20 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/user_name" />
+            android:text="@string/user_name"
+            android:ellipsize="end"
+            android:maxLines="1" />
 
         <TextView
             android:id="@+id/itemDescriptionStoryTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
-            android:text="@string/user_name" />
+            android:text="@string/story_description"
+            android:ellipsize="end"
+            android:maxLines="1" />
     </LinearLayout>
 
 </com.google.android.material.card.MaterialCardView>

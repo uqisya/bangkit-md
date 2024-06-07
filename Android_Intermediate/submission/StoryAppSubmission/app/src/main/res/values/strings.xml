@@ -18,4 +18,5 @@
     <string name="label_logout">Logout</string>
     <string name="user_name">Nama User</string>
     <string name="date_story">yyyy/mm/dd</string>
+    <string name="story_description">Deskripsi Story</string>
 </resources>

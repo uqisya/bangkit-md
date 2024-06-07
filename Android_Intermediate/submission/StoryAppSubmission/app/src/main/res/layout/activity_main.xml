@@ -7,34 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".view.main.MainActivity">
 
-    <ImageView
-        android:id="@+id/backgroundimageView"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:src="@drawable/background_account_information"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineHorizontal"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/nameAccountTextView"
-        style="@style/TitleGeneral.HeaderAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/label_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/backgroundimageView" />
-
-    <TextView
-        android:id="@+id/emailAccountTextView"
-        style="@style/TitleGeneral.HeaderAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/label_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/backgroundimageView" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineHorizontal"
         android:layout_width="wrap_content"
@@ -46,13 +18,16 @@
         android:id="@+id/listStoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:overScrollMode="ifContentScrolls"
         android:scrollbarSize="0dp"
+        android:paddingBottom="16dp"
+        android:clipToPadding="false"
         tools:listitem="@layout/story_item"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backgroundimageView" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"
