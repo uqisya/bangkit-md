@@ -39,7 +39,7 @@ object Injection {
         val apiService = userToken?.let { authToken ->
             provideApiServiceToken(authToken)
         }
-        if (apiService != null) return StoryRepository.getInstance(apiService, userPref)
+        if (apiService != null) return StoryRepository.getInstance(apiService)
         else throw IllegalStateException("User auth token is null")
     }
 

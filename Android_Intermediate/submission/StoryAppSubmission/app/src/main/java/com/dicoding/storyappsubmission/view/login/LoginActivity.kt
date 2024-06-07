@@ -23,6 +23,8 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.hide()
+
         val viewModelFactory= ViewModelFactory.getInstance(this@LoginActivity)
         viewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
 
@@ -44,12 +46,11 @@ class LoginActivity : AppCompatActivity() {
                     is ResultState.Success -> {
                         binding.progressBar.visibility = View.GONE
                         binding.loginButton.isEnabled = true
-                        showToast(this@LoginActivity, resultState.data.loginResult.name)
+                        val message = "Selamat datang ${resultState.data.loginResult.name}"
+                        showToast(this@LoginActivity, message)
                         lifecycleScope.launch {
                             viewModel.saveAuthToken(resultState.data.loginResult.token)
-                            val intent = Intent(this@LoginActivity, WelcomeActivity::class.java)
-                            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            startActivity(intent)
+                            moveToMain()
                         }
                     }
                     is ResultState.Error -> {
@@ -67,5 +68,11 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.emailEditText.text.toString()
         val password = binding.passwordEditText.text.toString()
         return Pair(email, password)
+    }
+
+    private fun moveToMain() {
+        val intent = Intent(this@LoginActivity, WelcomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        startActivity(intent)
     }
 }

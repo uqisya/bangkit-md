@@ -66,4 +66,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.ktx) // untuk viewmodelScope)
 
     implementation(libs.androidx.datastore.preferences)  // untuk dataStore, simpan token login
+    implementation(libs.com.google.code.gson)
+
+    implementation(libs.com.github.bumptech.glide)
 }

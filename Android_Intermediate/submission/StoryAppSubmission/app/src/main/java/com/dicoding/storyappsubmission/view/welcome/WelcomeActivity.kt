@@ -21,11 +21,12 @@ class WelcomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
 
+        supportActionBar?.hide()
+
         val viewModelFactory = ViewModelFactory.getInstance(this@WelcomeActivity)
         loginViewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
 
         loginViewModel.getAuthToken().observe(this@WelcomeActivity) { authToken ->
-            println("hei ini welcome")
             if (authToken != null) {
                 startActivity(Intent(this@WelcomeActivity, MainActivity::class.java))
                 finish()

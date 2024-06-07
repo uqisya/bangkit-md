@@ -24,7 +24,7 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
 
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 val userPreferences = UserPreferences.getInstance(context.dataStore)
-                MainViewModel(userPreferences) as T
+                MainViewModel(Injection.provideStoryRepository(context), userPreferences) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class")

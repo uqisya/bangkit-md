@@ -16,4 +16,6 @@
     <string name="subtitle_welcome_page">Explore dan Berbagi Aktivitas Kamu di SnapStory ^_^</string>
     <string name="status_message">Status Message</string>
     <string name="label_logout">Logout</string>
+    <string name="user_name">Nama User</string>
+    <string name="date_story">yyyy/mm/dd</string>
 </resources>
