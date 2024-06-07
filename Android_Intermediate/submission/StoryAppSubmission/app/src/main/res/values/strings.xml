@@ -14,4 +14,5 @@
     <string name="placeholder_name">Masukkan nama anda</string>
     <string name="label_welcome_page">Selamat Datang di SnapStory!</string>
     <string name="subtitle_welcome_page">Explore dan Berbagi Aktivitas Kamu di SnapStory ^_^</string>
+    <string name="status_message">Status Message</string>
 </resources>

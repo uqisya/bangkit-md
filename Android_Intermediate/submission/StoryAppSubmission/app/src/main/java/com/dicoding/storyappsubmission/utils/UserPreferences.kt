@@ -28,6 +28,12 @@ class UserPreferences(context: Context) {
         }
     }
 
+    suspend fun removeAuthToken() {
+        dataStore.edit { preferences ->
+            preferences.remove(KEY_AUTH_TOKEN)
+        }
+    }
+
     companion object {
         @Volatile
         private var INSTANCE: UserPreferences? = null
