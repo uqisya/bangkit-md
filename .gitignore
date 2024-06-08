@@ -1,5 +1,6 @@
 *.iml
 .gradle
+/Android_Intermediate/riwayat submission
 /Android_Fundamental
 /Android_Pemula
 /Applied_Machine_Learning
