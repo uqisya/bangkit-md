@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.model.UserModel
 import com.dicoding.storyappsubmission.databinding.ActivitySignupBinding
-import com.dicoding.storyappsubmission.factory.ViewModelFactory
+import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.showToast
 import com.dicoding.storyappsubmission.view.login.LoginActivity
 

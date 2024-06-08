@@ -8,7 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyappsubmission.databinding.ActivityWelcomeBinding
-import com.dicoding.storyappsubmission.factory.ViewModelFactory
+import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.view.login.LoginActivity
 import com.dicoding.storyappsubmission.view.login.LoginViewModel
 import com.dicoding.storyappsubmission.view.main.MainActivity

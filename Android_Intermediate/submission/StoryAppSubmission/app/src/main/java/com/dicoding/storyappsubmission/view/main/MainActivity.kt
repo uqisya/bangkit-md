@@ -14,7 +14,7 @@ import com.dicoding.storyappsubmission.R
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.remote.response.ListStoryItem
 import com.dicoding.storyappsubmission.databinding.ActivityMainBinding
-import com.dicoding.storyappsubmission.factory.ViewModelFactory
+import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.showToast
 import com.dicoding.storyappsubmission.view.adapter.StoryAdapter
 import com.dicoding.storyappsubmission.view.newStory.AddNewStoryActivity

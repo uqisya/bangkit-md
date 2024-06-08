@@ -13,7 +13,7 @@ import com.dicoding.storyappsubmission.R
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.model.StoryModel
 import com.dicoding.storyappsubmission.databinding.ActivityAddNewStoryBinding
-import com.dicoding.storyappsubmission.factory.ViewModelFactory
+import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.getImageUri
 import com.dicoding.storyappsubmission.utils.reduceFileImage
 import com.dicoding.storyappsubmission.utils.showToast
