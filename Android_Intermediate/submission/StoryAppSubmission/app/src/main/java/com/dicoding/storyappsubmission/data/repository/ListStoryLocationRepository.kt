@@ -2,18 +2,16 @@ package com.dicoding.storyappsubmission.data.repository
 
 import androidx.lifecycle.liveData
 import com.dicoding.storyappsubmission.data.ResultState
-import com.dicoding.storyappsubmission.data.model.StoryModel
 import com.dicoding.storyappsubmission.data.remote.response.ErrorResponse
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiService
 import com.google.gson.Gson
 import retrofit2.HttpException
 
-class AddNewStoryRepository(private val apiService: ApiService) {
-
-    fun addNewStory(story: StoryModel) = liveData {
+class ListStoryLocationRepository(private val apiService: ApiService) {
+    fun getAllStoriesWithLocation() = liveData {
         emit(ResultState.Loading)
         try {
-            val successResponse = apiService.addNewStory(story.file, story.description, story.lat, story.lon)
+            val successResponse = apiService.getAllStoriesWithLocation()
             emit(ResultState.Success(successResponse))
         } catch (e: HttpException) {
             val errorJsonString = e.response()?.errorBody()?.string()
@@ -28,10 +26,10 @@ class AddNewStoryRepository(private val apiService: ApiService) {
 
     companion object {
         @Volatile
-        private var instance: AddNewStoryRepository? = null
+        private var instance: ListStoryLocationRepository? = null
         fun getInstance(apiService: ApiService) =
             instance ?: synchronized(this) {
-                instance ?: AddNewStoryRepository(apiService)
+                instance ?: ListStoryLocationRepository(apiService)
             }.also { instance = it }
     }
 }

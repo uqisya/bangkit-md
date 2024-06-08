@@ -86,6 +86,29 @@
                 android:text="@string/camera" />
         </RelativeLayout>
 
+        <LinearLayout
+            android:id="@+id/containerAccessLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/cameraContainerRelativeLayout">
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/locationSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/posting_dengan_lokasi" />
+
+            <TextView
+                android:id="@+id/locationTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:layout_marginHorizontal="16dp"
+                android:text="@string/location"
+                app:drawableStartCompat="@drawable/round_location_on_24" />
+        </LinearLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/descriptionEditTextLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -94,7 +117,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cameraContainerRelativeLayout">
+            app:layout_constraintTop_toBottomOf="@id/containerAccessLocation">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/descriptionEditText"

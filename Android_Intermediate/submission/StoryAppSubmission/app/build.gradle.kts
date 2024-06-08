@@ -56,6 +56,7 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.play.services.maps)
+    implementation(libs.play.services.location)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -71,4 +72,6 @@ dependencies {
     implementation(libs.com.google.code.gson)
 
     implementation(libs.com.github.bumptech.glide)
+
+    implementation(libs.play.services.location) // untuk location
 }

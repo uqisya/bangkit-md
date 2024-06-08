@@ -4,6 +4,7 @@ import android.content.Context
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiConfig
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiService
 import com.dicoding.storyappsubmission.data.repository.AddNewStoryRepository
+import com.dicoding.storyappsubmission.data.repository.ListStoryLocationRepository
 import com.dicoding.storyappsubmission.data.repository.ListStoryRepository
 import com.dicoding.storyappsubmission.data.repository.LoginRepository
 import com.dicoding.storyappsubmission.data.repository.SignupRepository
@@ -40,7 +41,7 @@ object Injection {
         return userToken
     }
 
-    fun provideListStoryRepository(context: Context): ListStoryRepository {
+    fun provideGetListStoryRepository(context: Context): ListStoryRepository {
         val userToken = getAuthToken(context)
 
         val apiService = userToken?.let { authToken ->
@@ -50,7 +51,7 @@ object Injection {
         else throw IllegalStateException("User auth token is null")
     }
 
-    fun provideStoryDetailRepository(context: Context): StoryDetailRepository {
+    fun provideGetStoryDetailRepository(context: Context): StoryDetailRepository {
         val userToken = getAuthToken(context)
 
         val apiService = userToken?.let { authToken ->
@@ -63,12 +64,22 @@ object Injection {
 
     fun provideAddNewStoryRepository(context: Context): AddNewStoryRepository {
         val userToken = getAuthToken(context)
-        println(userToken)
 
         val apiService = userToken?.let { authToken ->
             provideApiServiceToken(authToken)
         }
         if (apiService != null) return AddNewStoryRepository.getInstance(apiService)
+        else throw IllegalStateException("User auth token is null")
+    }
+
+    fun provideGetListStoryWithLocationRepository(context: Context): ListStoryLocationRepository {
+        val userToken = getAuthToken(context)
+
+        val apiService = userToken?.let { authToken ->
+            provideApiServiceToken(authToken)
+        }
+
+        if (apiService != null) return ListStoryLocationRepository.getInstance(apiService)
         else throw IllegalStateException("User auth token is null")
     }
 

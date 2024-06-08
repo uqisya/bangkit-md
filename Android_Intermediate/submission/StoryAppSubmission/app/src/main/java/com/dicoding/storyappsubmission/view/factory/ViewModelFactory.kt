@@ -11,6 +11,7 @@ import com.dicoding.storyappsubmission.view.main.MainViewModel
 import com.dicoding.storyappsubmission.view.newStory.AddNewStoryViewModel
 import com.dicoding.storyappsubmission.view.signup.SignupViewModel
 import com.dicoding.storyappsubmission.view.storyDetail.StoryDetailViewModel
+import com.dicoding.storyappsubmission.view.storyMaps.StoryMapsViewModel
 
 class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
@@ -18,23 +19,22 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             modelClass.isAssignableFrom(SignupViewModel::class.java) -> {
                 SignupViewModel(Injection.provideSignupRepository()) as T
             }
-
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
                 val userPreferences = UserPreferences.getInstance(context.dataStore)
                 LoginViewModel(Injection.provideLoginRepository(), userPreferences) as T
             }
-
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 val userPreferences = UserPreferences.getInstance(context.dataStore)
-                MainViewModel(Injection.provideListStoryRepository(context), userPreferences) as T
+                MainViewModel(Injection.provideGetListStoryRepository(context), userPreferences) as T
             }
-
             modelClass.isAssignableFrom(StoryDetailViewModel::class.java) -> {
-                StoryDetailViewModel(Injection.provideStoryDetailRepository(context)) as T
+                StoryDetailViewModel(Injection.provideGetStoryDetailRepository(context)) as T
             }
-
             modelClass.isAssignableFrom(AddNewStoryViewModel::class.java) -> {
                 AddNewStoryViewModel(Injection.provideAddNewStoryRepository(context)) as T
+            }
+            modelClass.isAssignableFrom(StoryMapsViewModel::class.java) -> {
+                StoryMapsViewModel(Injection.provideGetListStoryWithLocationRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class")

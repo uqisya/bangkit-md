@@ -8,9 +8,9 @@ import com.bumptech.glide.Glide
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.remote.response.Story
 import com.dicoding.storyappsubmission.databinding.ActivityStoryDetailBinding
-import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.setLocalDateFormat
 import com.dicoding.storyappsubmission.utils.showToast
+import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 
 class StoryDetailActivity : AppCompatActivity() {
 

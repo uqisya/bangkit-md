@@ -11,5 +11,6 @@
         android:id="@+id/action_story_maps"
         android:orderInCategory="100"
         android:title="@string/story_maps"
-        app:showAsAction="never" />
+        android:icon="@drawable/round_share_location_24"
+        app:showAsAction="ifRoom" />
 </menu>

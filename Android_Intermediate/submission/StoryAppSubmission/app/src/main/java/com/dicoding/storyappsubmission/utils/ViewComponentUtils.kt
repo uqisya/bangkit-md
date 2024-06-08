@@ -1,6 +1,5 @@
 package com.dicoding.storyappsubmission.utils
 
-import android.app.Application
 import android.content.Context
 import android.graphics.drawable.ColorDrawable
 import android.widget.Toast

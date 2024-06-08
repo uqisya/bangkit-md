@@ -5,6 +5,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +14,12 @@ import com.dicoding.storyappsubmission.R
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.model.StoryModel
 import com.dicoding.storyappsubmission.databinding.ActivityAddNewStoryBinding
-import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
+import com.dicoding.storyappsubmission.utils.LocationUserUtils
 import com.dicoding.storyappsubmission.utils.getImageUri
 import com.dicoding.storyappsubmission.utils.reduceFileImage
 import com.dicoding.storyappsubmission.utils.showToast
 import com.dicoding.storyappsubmission.utils.uriToFile
+import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.view.main.MainActivity
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
@@ -30,6 +32,7 @@ class AddNewStoryActivity : AppCompatActivity() {
     private lateinit var viewModel: AddNewStoryViewModel
 
     private var currentImageUri: Uri? = null
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<Array<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,25 @@ class AddNewStoryActivity : AppCompatActivity() {
 
         binding.uploadButton.setOnClickListener {
             uploadImage()
+        }
+
+        requestPermissionLauncher = registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) {}
+        LocationUserUtils.init(this, requestPermissionLauncher)
+
+        binding.locationSwitch.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                viewModel.getUserLocation(this)
+            } else {
+                viewModel.clearUserLocation()
+            }
+        }
+
+        viewModel.userLocation.observe(this) { location ->
+            val latitude = location?.latitude
+            val longitude = location?.longitude
+            binding.locationTextView.text = "$latitude, $longitude"
         }
     }
 
@@ -135,16 +157,21 @@ class AddNewStoryActivity : AppCompatActivity() {
     private fun getDataFromUser(uri: Uri): StoryModel {
         val imageFile = uriToFile(uri, this).reduceFileImage()
         val description = binding.descriptionEditText.text.toString()
+        val latitude = viewModel.userLocation.value?.latitude ?: 0.0
+        val longitude = viewModel.userLocation.value?.longitude ?: 0.0
+
         viewModel.setLoading(true)
 
-        val requestBody = description.toRequestBody("text/plain".toMediaType())
         val requestImageFile = imageFile.asRequestBody("image/jpeg".toMediaType())
         val multipartBody = MultipartBody.Part.createFormData(
             "photo",
             imageFile.name,
             requestImageFile
         )
+        val requestBody = description.toRequestBody("text/plain".toMediaType())
+        val requestLatitude = latitude.toString().toRequestBody("text/plain".toMediaType())
+        val requestLongitude = longitude.toString().toRequestBody("text/plain".toMediaType())
 
-        return StoryModel(multipartBody, requestBody)
+        return StoryModel(multipartBody, requestBody, requestLatitude, requestLongitude)
     }
 }

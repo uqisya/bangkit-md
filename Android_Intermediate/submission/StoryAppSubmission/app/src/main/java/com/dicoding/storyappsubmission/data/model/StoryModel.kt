@@ -5,5 +5,7 @@ import okhttp3.RequestBody
 
 data class StoryModel(
     val file: MultipartBody.Part,
-    val description: RequestBody
+    val description: RequestBody,
+    val lat: RequestBody?,
+    val lon: RequestBody?
 )

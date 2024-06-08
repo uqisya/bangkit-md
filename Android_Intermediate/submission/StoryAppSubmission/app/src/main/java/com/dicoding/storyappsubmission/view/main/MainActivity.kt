@@ -1,7 +1,6 @@
 package com.dicoding.storyappsubmission.view.main
 
 import android.content.Intent
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -15,9 +14,9 @@ import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.remote.response.ListStoryItem
 import com.dicoding.storyappsubmission.databinding.ActivityMainBinding
 import com.dicoding.storyappsubmission.utils.setBackgroundActionBar
-import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.showToast
 import com.dicoding.storyappsubmission.view.adapter.StoryAdapter
+import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.view.newStory.AddNewStoryActivity
 import com.dicoding.storyappsubmission.view.storyMaps.StoryMapsActivity
 import com.dicoding.storyappsubmission.view.welcome.WelcomeActivity

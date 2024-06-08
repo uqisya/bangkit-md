@@ -28,4 +28,7 @@
     <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
     <string name="title_activity_story_maps">StoryMapsActivity</string>
     <string name="story_maps">Story Maps</string>
+    <string name="snap_story_maps">SnapStory Maps</string>
+    <string name="posting_dengan_lokasi">Posting dengan lokasi?</string>
+    <string name="lokasi_kamu">Lokasi kamu</string>
 </resources>
