@@ -1,14 +1,12 @@
 package com.dicoding.storyappsubmission.view.main
 
 import android.content.Intent
-import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,25 +14,17 @@ import com.dicoding.storyappsubmission.R
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.remote.response.ListStoryItem
 import com.dicoding.storyappsubmission.databinding.ActivityMainBinding
-import com.dicoding.storyappsubmission.view.welcome.WelcomeActivity
 import com.dicoding.storyappsubmission.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.showToast
 import com.dicoding.storyappsubmission.view.adapter.StoryAdapter
-import com.dicoding.storyappsubmission.view.storyDetail.StoryDetailActivity
+import com.dicoding.storyappsubmission.view.newStory.AddNewStoryActivity
+import com.dicoding.storyappsubmission.view.welcome.WelcomeActivity
 import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModel: MainViewModel
-
-//    private val authTokenObserver = Observer<String?> { authToken ->
-//        if (authToken == null) {
-//            val intent = Intent(this, WelcomeActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +49,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-//        viewModel.getAuthToken().observe(this, authTokenObserver)
-
-//        getAllStories()
+        binding.fabAddNewStory.setOnClickListener {
+            val intent = Intent(this, AddNewStoryActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -107,14 +98,6 @@ class MainActivity : AppCompatActivity() {
         adapter.submitList(listStory)
 
         binding.listStoryRecyclerView.adapter = adapter
-
-        adapter.setOnItemClickListener(object : StoryAdapter.OnItemClickListener {
-            override fun onItemClick(storyItem: ListStoryItem) {
-                val intent = Intent(this@MainActivity, StoryDetailActivity::class.java)
-                intent.putExtra(StoryDetailActivity.STORY_ID, storyItem.id)
-                startActivity(intent)
-            }
-        })
     }
 
     private fun setLayoutAdapter() {
@@ -127,10 +110,5 @@ class MainActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         val colorDrawable = ColorDrawable(resources.getColor(R.color.blue_white_soft))
         actionBar?.setBackgroundDrawable(colorDrawable)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-//        viewModel.getAuthToken().removeObserver(authTokenObserver)
     }
 }

@@ -2,23 +2,15 @@ package com.dicoding.storyappsubmission.view.storyDetail
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import com.dicoding.storyappsubmission.R
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.remote.response.Story
-import com.dicoding.storyappsubmission.data.remote.response.StoryDetailResponse
 import com.dicoding.storyappsubmission.databinding.ActivityStoryDetailBinding
 import com.dicoding.storyappsubmission.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.setLocalDateFormat
 import com.dicoding.storyappsubmission.utils.showToast
-import com.dicoding.storyappsubmission.view.main.MainViewModel
-import kotlinx.coroutines.launch
 
 class StoryDetailActivity : AppCompatActivity() {
 

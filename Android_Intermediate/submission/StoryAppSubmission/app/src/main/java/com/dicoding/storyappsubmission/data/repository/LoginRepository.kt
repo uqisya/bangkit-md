@@ -2,9 +2,7 @@ package com.dicoding.storyappsubmission.data.repository
 
 import androidx.lifecycle.liveData
 import com.dicoding.storyappsubmission.data.ResultState
-import com.dicoding.storyappsubmission.data.model.UserModel
 import com.dicoding.storyappsubmission.data.remote.response.ErrorResponse
-import com.dicoding.storyappsubmission.data.remote.response.LoginResponse
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiService
 import com.google.gson.Gson
 import retrofit2.HttpException

@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.dicoding.storyappsubmission.data.repository.ListStoryRepository
-import com.dicoding.storyappsubmission.data.repository.StoryDetailRepository
 import com.dicoding.storyappsubmission.utils.UserPreferences
 import kotlinx.coroutines.launch
 

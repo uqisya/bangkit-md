@@ -1,15 +1,19 @@
 package com.dicoding.storyappsubmission.view.adapter
 
+import android.app.Activity
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.dicoding.storyappsubmission.data.remote.response.ListStoryItem
-import com.dicoding.storyappsubmission.data.remote.response.StoryResponse
 import com.dicoding.storyappsubmission.databinding.StoryItemBinding
 import com.dicoding.storyappsubmission.utils.setLocalDateFormat
+import com.dicoding.storyappsubmission.view.storyDetail.StoryDetailActivity
 
 class StoryAdapter : ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_CALLBACK) {
 
@@ -18,18 +22,9 @@ class StoryAdapter : ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_
         return MyViewHolder(binding)
     }
 
-    private lateinit var listener: OnItemClickListener
-    fun setOnItemClickListener(listener: OnItemClickListener) {
-        this.listener = listener
-    }
-
     override fun onBindViewHolder(holder: StoryAdapter.MyViewHolder, position: Int) {
         val storyItem = getItem(position)
         holder.bind(storyItem)
-
-        holder.itemView.setOnClickListener {
-            listener.onItemClick(storyItem)
-        }
     }
 
     class MyViewHolder(private val binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
@@ -42,11 +37,22 @@ class StoryAdapter : ListAdapter<ListStoryItem, StoryAdapter.MyViewHolder>(DIFF_
             Glide.with(itemView.context)
                 .load(storyItem.photoUrl)
                 .into(binding.thumbnailImageView)
-        }
-    }
 
-    interface OnItemClickListener {
-        fun onItemClick(storyItem: ListStoryItem)
+            itemView.setOnClickListener {
+                val intent = Intent(itemView.context, StoryDetailActivity::class.java)
+                intent.putExtra(StoryDetailActivity.STORY_ID, storyItem.id)
+
+                val optionsCompat: ActivityOptionsCompat =
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(
+                        itemView.context as Activity,
+                        Pair(binding.thumbnailImageView, "thumbnail"),
+                        Pair(binding.timeTextView, "localDate"),
+                        Pair(binding.itemNameUserTextView, "userName"),
+                        Pair(binding.itemDescriptionStoryTextView, "storyDescription"),
+                    )
+                itemView.context.startActivity(intent, optionsCompat.toBundle())
+            }
+        }
     }
 
     companion object {

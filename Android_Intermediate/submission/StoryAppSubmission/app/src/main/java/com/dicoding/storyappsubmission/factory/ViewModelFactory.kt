@@ -8,6 +8,7 @@ import com.dicoding.storyappsubmission.utils.UserPreferences
 import com.dicoding.storyappsubmission.utils.dataStore
 import com.dicoding.storyappsubmission.view.login.LoginViewModel
 import com.dicoding.storyappsubmission.view.main.MainViewModel
+import com.dicoding.storyappsubmission.view.newStory.AddNewStoryViewModel
 import com.dicoding.storyappsubmission.view.signup.SignupViewModel
 import com.dicoding.storyappsubmission.view.storyDetail.StoryDetailViewModel
 
@@ -29,8 +30,11 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             }
 
             modelClass.isAssignableFrom(StoryDetailViewModel::class.java) -> {
-                val userPreferences = UserPreferences.getInstance(context.dataStore)
-                StoryDetailViewModel(Injection.provideStoryDetailRepository(context), userPreferences) as T
+                StoryDetailViewModel(Injection.provideStoryDetailRepository(context)) as T
+            }
+
+            modelClass.isAssignableFrom(AddNewStoryViewModel::class.java) -> {
+                AddNewStoryViewModel(Injection.provideAddNewStoryRepository(context)) as T
             }
 
             else -> throw IllegalArgumentException("Unknown ViewModel class")

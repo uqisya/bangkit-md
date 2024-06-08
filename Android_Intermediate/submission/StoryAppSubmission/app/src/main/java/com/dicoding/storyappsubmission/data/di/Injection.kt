@@ -3,9 +3,10 @@ package com.dicoding.storyappsubmission.data.di
 import android.content.Context
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiConfig
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiService
+import com.dicoding.storyappsubmission.data.repository.AddNewStoryRepository
+import com.dicoding.storyappsubmission.data.repository.ListStoryRepository
 import com.dicoding.storyappsubmission.data.repository.LoginRepository
 import com.dicoding.storyappsubmission.data.repository.SignupRepository
-import com.dicoding.storyappsubmission.data.repository.ListStoryRepository
 import com.dicoding.storyappsubmission.data.repository.StoryDetailRepository
 import com.dicoding.storyappsubmission.utils.UserPreferences
 import com.dicoding.storyappsubmission.utils.dataStore
@@ -60,5 +61,15 @@ object Injection {
         else throw IllegalStateException("User auth token is null")
     }
 
+    fun provideAddNewStoryRepository(context: Context): AddNewStoryRepository {
+        val userToken = getAuthToken(context)
+        println(userToken)
+
+        val apiService = userToken?.let { authToken ->
+            provideApiServiceToken(authToken)
+        }
+        if (apiService != null) return AddNewStoryRepository.getInstance(apiService)
+        else throw IllegalStateException("User auth token is null")
+    }
 
 }

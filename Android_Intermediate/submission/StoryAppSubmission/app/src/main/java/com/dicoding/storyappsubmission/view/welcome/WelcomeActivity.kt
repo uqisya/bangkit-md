@@ -1,15 +1,18 @@
 package com.dicoding.storyappsubmission.view.welcome
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.storyappsubmission.databinding.ActivityWelcomeBinding
+import com.dicoding.storyappsubmission.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.view.login.LoginActivity
 import com.dicoding.storyappsubmission.view.login.LoginViewModel
 import com.dicoding.storyappsubmission.view.main.MainActivity
 import com.dicoding.storyappsubmission.view.signup.SignupActivity
-import com.dicoding.storyappsubmission.factory.ViewModelFactory
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -35,12 +38,6 @@ class WelcomeActivity : AppCompatActivity() {
             }
         }
 
-        // Set the alpha of the buttons and the title to 1 to make them visible
-        binding.loginButton.alpha = 1f
-        binding.signupButton.alpha = 1f
-        binding.titleTextView.alpha = 1f
-        binding.descTextView.alpha = 1f
-
         binding.loginButton.setOnClickListener {
             val intent = Intent(this@WelcomeActivity, LoginActivity::class.java)
             startActivity(intent)
@@ -49,6 +46,31 @@ class WelcomeActivity : AppCompatActivity() {
         binding.signupButton.setOnClickListener {
             val intent = Intent(this@WelcomeActivity, SignupActivity::class.java)
             startActivity(intent)
+        }
+
+        playAnimation()
+    }
+
+    private fun playAnimation() {
+        ObjectAnimator.ofFloat(binding.welcomeThumbnailImageView, View.TRANSLATION_X, -30f, 30f).apply {
+            duration = 6000
+            repeatCount = ObjectAnimator.INFINITE
+            repeatMode = ObjectAnimator.REVERSE
+        }.start()
+
+        val thumbnail = ObjectAnimator.ofFloat(binding.welcomeThumbnailImageView, View.ALPHA, 0f, 1f).setDuration(500)
+        val login = ObjectAnimator.ofFloat(binding.loginButton, View.ALPHA, 0f, 1f).setDuration(500)
+        val signup = ObjectAnimator.ofFloat(binding.signupButton, View.ALPHA, 0f, 1f).setDuration(500)
+        val title = ObjectAnimator.ofFloat(binding.titleTextView, View.ALPHA, 0f, 1f).setDuration(500)
+        val desc = ObjectAnimator.ofFloat(binding.descTextView, View.ALPHA, 0f, 1f).setDuration(500)
+
+        val together = AnimatorSet().apply {
+            playTogether(login, signup)
+        }
+
+        AnimatorSet().apply {
+            playSequentially(thumbnail, title, desc, together)
+            start()
         }
     }
 }

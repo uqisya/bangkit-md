@@ -20,4 +20,10 @@
     <string name="date_story">yyyy/mm/dd</string>
     <string name="story_description">Deskripsi Story</string>
     <string name="location">location</string>
+    <string name="submit">Submit</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="placeholder_deskripsi_story_submit">Masukkan deskripsi story anda</string>
+    <string name="add_new_story">Add New Story</string>
+    <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
 </resources>
