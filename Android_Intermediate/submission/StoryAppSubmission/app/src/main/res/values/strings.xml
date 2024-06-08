@@ -26,4 +26,6 @@
     <string name="placeholder_deskripsi_story_submit">Masukkan deskripsi story anda</string>
     <string name="add_new_story">Add New Story</string>
     <string name="empty_image_warning">Silakan masukkan berkas gambar terlebih dahulu.</string>
+    <string name="title_activity_story_maps">StoryMapsActivity</string>
+    <string name="story_maps">Story Maps</string>
 </resources>

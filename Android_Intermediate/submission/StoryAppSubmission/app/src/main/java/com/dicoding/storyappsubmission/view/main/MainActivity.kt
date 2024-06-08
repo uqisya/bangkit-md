@@ -14,10 +14,12 @@ import com.dicoding.storyappsubmission.R
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.remote.response.ListStoryItem
 import com.dicoding.storyappsubmission.databinding.ActivityMainBinding
+import com.dicoding.storyappsubmission.utils.setBackgroundActionBar
 import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.utils.showToast
 import com.dicoding.storyappsubmission.view.adapter.StoryAdapter
 import com.dicoding.storyappsubmission.view.newStory.AddNewStoryActivity
+import com.dicoding.storyappsubmission.view.storyMaps.StoryMapsActivity
 import com.dicoding.storyappsubmission.view.welcome.WelcomeActivity
 import kotlinx.coroutines.launch
 
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setBackgroundActionBar()
+        setBackgroundActionBar(this@MainActivity)
         supportActionBar?.show()
 
         setLayoutAdapter()
@@ -64,6 +66,11 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.action_logout -> {
                 viewModel.logoutAccount()
+                true
+            }
+            R.id.action_story_maps -> {
+                val intent = Intent(this, StoryMapsActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -106,9 +113,9 @@ class MainActivity : AppCompatActivity() {
         binding.listStoryRecyclerView.layoutManager = layoutManager
     }
 
-    private fun setBackgroundActionBar() {
-        val actionBar = supportActionBar
-        val colorDrawable = ColorDrawable(resources.getColor(R.color.blue_white_soft))
-        actionBar?.setBackgroundDrawable(colorDrawable)
-    }
+//    private fun setBackgroundActionBar() {
+//        val actionBar = supportActionBar
+//        val colorDrawable = ColorDrawable(resources.getColor(R.color.blue_white_soft))
+//        actionBar?.setBackgroundDrawable(colorDrawable)
+//    }
 }
