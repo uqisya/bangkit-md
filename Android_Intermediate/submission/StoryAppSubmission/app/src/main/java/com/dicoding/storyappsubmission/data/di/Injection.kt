@@ -1,6 +1,7 @@
 package com.dicoding.storyappsubmission.data.di
 
 import android.content.Context
+import com.dicoding.storyappsubmission.data.database.StoryDatabase
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiConfig
 import com.dicoding.storyappsubmission.data.remote.retrofit.ApiService
 import com.dicoding.storyappsubmission.data.repository.AddNewStoryRepository
@@ -41,13 +42,13 @@ object Injection {
         return userToken
     }
 
-    fun provideGetListStoryRepository(context: Context): ListStoryRepository {
+    fun provideGetListStoryRepository(context: Context, storyDatabase: StoryDatabase): ListStoryRepository {
         val userToken = getAuthToken(context)
 
         val apiService = userToken?.let { authToken ->
             provideApiServiceToken(authToken)
         }
-        if (apiService != null) return ListStoryRepository.getInstance(apiService)
+        if (apiService != null) return ListStoryRepository.getInstance(apiService, storyDatabase)
         else throw IllegalStateException("User auth token is null")
     }
 

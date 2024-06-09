@@ -33,7 +33,7 @@ object LocationUserUtils {
                     if (location != null) {
                         continuation.resume(location)
                     } else {
-                        showToast(context, "Location not found. Try Again")
+                        showToast(context, "Location not found. Please enable location and try again.")
                         continuation.resume(null)
                     }
                 }.addOnFailureListener { exception ->

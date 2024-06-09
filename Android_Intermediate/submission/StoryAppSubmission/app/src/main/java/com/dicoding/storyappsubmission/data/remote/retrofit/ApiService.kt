@@ -39,7 +39,10 @@ interface ApiService {
     // tapi dengan menambahkan @Header("Authorization") token: String di setiap endpoint akan merepotkan
     // maka buatlah di apiConfig.kt
     @GET("stories")  // auth
-    suspend fun getAllStories(): StoryResponse
+    suspend fun getAllStories(
+        @Query("page") page: Int,
+        @Query("size") size: Int,
+    ): StoryResponse
 
     @GET("stories/{id}")  // auth
     suspend fun getDetailStoryByID(

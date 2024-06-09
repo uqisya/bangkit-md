@@ -15,6 +15,7 @@ import com.dicoding.storyappsubmission.data.remote.response.ListStoryItem
 import com.dicoding.storyappsubmission.databinding.ActivityMainBinding
 import com.dicoding.storyappsubmission.utils.setBackgroundActionBar
 import com.dicoding.storyappsubmission.utils.showToast
+import com.dicoding.storyappsubmission.view.adapter.LoadingStateAdapter
 import com.dicoding.storyappsubmission.view.adapter.StoryAdapter
 import com.dicoding.storyappsubmission.view.factory.ViewModelFactory
 import com.dicoding.storyappsubmission.view.newStory.AddNewStoryActivity
@@ -77,33 +78,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getAllStories() {
-        viewModel.getAllStories().observe(this) { resultState ->
-            if (resultState != null) {
-                when (resultState) {
-                    is ResultState.Loading -> {
-                        binding.progressBar.visibility = View.VISIBLE
-                    }
-                    is ResultState.Success -> {
-                        binding.progressBar.visibility = View.GONE
-                        lifecycleScope.launch {
-                            setStoriesListDataAdapter(resultState.data.listStory)
-                        }
-                    }
-                    is ResultState.Error -> {
-                        binding.progressBar.visibility = View.GONE
-                        showToast(this@MainActivity, resultState.errorMessage)
-                    }
-                    else -> {}
-                }
-            }
+        val adapter = getStoriesListDataAdapter()
+        viewModel.getAllStories().observe(this) { pagingData ->
+            adapter.submitData(lifecycle, pagingData)
         }
     }
 
-    private fun setStoriesListDataAdapter(listStory: List<ListStoryItem?>) {
+    private fun getStoriesListDataAdapter(): StoryAdapter {
         val adapter = StoryAdapter()
-        adapter.submitList(listStory)
+        binding.listStoryRecyclerView.adapter = adapter.withLoadStateFooter(
+            footer = LoadingStateAdapter {
+                adapter.retry()
+            }
+        )
 
-        binding.listStoryRecyclerView.adapter = adapter
+        return adapter
     }
 
     private fun setLayoutAdapter() {
@@ -111,10 +100,4 @@ class MainActivity : AppCompatActivity() {
         val layoutManager = LinearLayoutManager(this)
         binding.listStoryRecyclerView.layoutManager = layoutManager
     }
-
-//    private fun setBackgroundActionBar() {
-//        val actionBar = supportActionBar
-//        val colorDrawable = ColorDrawable(resources.getColor(R.color.blue_white_soft))
-//        actionBar?.setBackgroundDrawable(colorDrawable)
-//    }
 }

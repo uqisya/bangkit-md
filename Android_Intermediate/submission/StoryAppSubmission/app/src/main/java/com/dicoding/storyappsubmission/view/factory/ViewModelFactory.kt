@@ -3,6 +3,7 @@ package com.dicoding.storyappsubmission.view.factory
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dicoding.storyappsubmission.data.database.StoryDatabase
 import com.dicoding.storyappsubmission.data.di.Injection
 import com.dicoding.storyappsubmission.utils.UserPreferences
 import com.dicoding.storyappsubmission.utils.dataStore
@@ -25,7 +26,8 @@ class ViewModelFactory(private val context: Context) : ViewModelProvider.Factory
             }
             modelClass.isAssignableFrom(MainViewModel::class.java) -> {
                 val userPreferences = UserPreferences.getInstance(context.dataStore)
-                MainViewModel(Injection.provideGetListStoryRepository(context), userPreferences) as T
+                val storyDatabase = StoryDatabase.getDatabase(context)
+                MainViewModel(Injection.provideGetListStoryRepository(context, storyDatabase), userPreferences) as T
             }
             modelClass.isAssignableFrom(StoryDetailViewModel::class.java) -> {
                 StoryDetailViewModel(Injection.provideGetStoryDetailRepository(context)) as T

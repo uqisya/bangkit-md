@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("kotlin-parcelize")
+    id("kotlin-android")
+    id("com.google.devtools.ksp")
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
@@ -17,6 +19,7 @@ android {
         versionName = "1.0"
 
         buildConfigField ("String", "BASE_URL", "\"https://story-api.dicoding.dev/v1/\"")
+        buildConfigField ("String", "DATABASE_NAME", "\"story_database\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -74,4 +77,9 @@ dependencies {
     implementation(libs.com.github.bumptech.glide)
 
     implementation(libs.play.services.location) // untuk location
+
+    implementation(libs.androidx.paging.runtime.ktx)
+
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.room.compiler)
 }
