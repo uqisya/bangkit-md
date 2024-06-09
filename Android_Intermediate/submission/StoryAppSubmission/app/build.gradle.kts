@@ -43,6 +43,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "17"
+        freeCompilerArgs = freeCompilerArgs + "-Xopt-in=kotlin.RequiresOptIn"
     }
 
     buildFeatures {
@@ -79,6 +80,7 @@ dependencies {
     implementation(libs.play.services.location) // untuk location
 
     implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.room.paging)
 
     implementation(libs.androidx.room.ktx)
     ksp(libs.room.compiler)

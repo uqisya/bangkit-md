@@ -2,12 +2,14 @@ package com.dicoding.storyappsubmission.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.liveData
 import com.dicoding.storyappsubmission.data.ResultState
 import com.dicoding.storyappsubmission.data.database.StoryDatabase
+import com.dicoding.storyappsubmission.data.mediator.StoryRemoteMediator
 import com.dicoding.storyappsubmission.data.pager.StoryPagingSource
 import com.dicoding.storyappsubmission.data.remote.response.ErrorResponse
 import com.dicoding.storyappsubmission.data.remote.response.ListStoryItem
@@ -21,12 +23,15 @@ class ListStoryRepository(
 ) {
 
     fun getAllStories(): LiveData<PagingData<ListStoryItem>> {
+        @OptIn(ExperimentalPagingApi::class)
         return Pager(
             config = PagingConfig(
                 pageSize = 5
             ),
+            remoteMediator = StoryRemoteMediator(database, apiService),
             pagingSourceFactory = {
-                StoryPagingSource(apiService)
+//                StoryPagingSource(apiService)
+                database.storyDao().getAllStories()
             }
         ).liveData
     }
