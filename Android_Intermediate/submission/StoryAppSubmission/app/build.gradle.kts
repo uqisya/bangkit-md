@@ -92,4 +92,6 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test) //TestDispatcher
     testImplementation(libs.mockito.core)
     testImplementation(libs.mockito.inline)
+
+    androidTestImplementation(libs.espresso.intents) //IntentsTestRule
 }
